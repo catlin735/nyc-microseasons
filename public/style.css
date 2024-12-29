@@ -1,0 +1,46 @@
+
+.navbar {
+    overflow: auto;
+    display:flex;
+    justify-content:center;
+    width:100vw;
+    position: sticky; 
+    top: 0;
+    left: 0;
+}
+
+.nav-item {
+    margin: 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position: relative;
+    min-width: 100px;
+    height:100px;
+    text-align:center;
+    border:  0.5px DarkSlateGrey dotted;
+   
+}
+
+.nav-item img {
+    position: absolute;
+    width: 60%;
+    height: 60%;
+}
+
+.container {
+    font-family: 'Trebuchet MS',serif;
+    padding: 2em;
+    padding-top: 1.5em;
+    max-width: 40em;
+    margin: 0 auto;
+    margin-top: 6%;
+    margin-bottom: 6%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+footer {
+  
+}
