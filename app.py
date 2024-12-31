@@ -1,8 +1,9 @@
 import sqlite3
 from datetime import date, datetime as dt
-from flask import Flask,render_template,redirect
+from flask import Flask,render_template,request,jsonify
 from pytz import timezone
 from werkzeug.exceptions import abort
+
 
 app = Flask(__name__)
 
@@ -12,24 +13,29 @@ class Season:
         self.start_date = str(dt.strptime(start_date,'%Y-%m-%d').month)+'/'+str(dt.strptime(start_date,'%Y-%m-%d').day)
         self.end_date = str(dt.strptime(end_date,'%Y-%m-%d').month)+'/'+str(dt.strptime(end_date,'%Y-%m-%d').day)
         self.description=description
+        self.image="./static/assets/img_"+str(self.id)+".jpg"
+        self.dictionary={'id':self.id,'start_date':self.start_date,'end_date':self.end_date,'description':self.description,'image':self.image}
 
 @app.route('/')
 def index():
-    return redirect("/0")
-
-
-@app.route('/<int:id>')
-def season(id=1):
     conn = get_db_connection()
-    microseasons = conn.execute('SELECT rowid FROM microseasons').fetchall()
-    if id==0:
-        s=get_season_from_date(dt.now(timezone('US/Eastern')))
-    else:
-        s=get_season_from_id(id)
+    ms = conn.execute('SELECT rowid,* FROM microseasons').fetchall()
+    microseasons=[]
+    for s in ms:
+        seasons=Season(s['rowid'],s['start_date'],s['end_date'],s['description'])
+        microseasons.append(seasons)
+    s=get_season_from_date(dt.now(timezone('US/Eastern')))
     season=Season(s['rowid'],s['start_date'],s['end_date'],s['description'])
     conn.close()
-    image="./static/assets/img_"+str(season.id)+".jpg"
-    return render_template('index.html',seasons=microseasons,season=season,image=image)
+    return render_template('index.html',seasons=microseasons,season=season)
+
+
+@app.route('/get',methods=['GET'])
+def season():
+    id=request.args.get('id')
+    s=get_season_from_id(id)
+    season=Season(s['rowid'],s['start_date'],s['end_date'],s['description'])
+    return jsonify(season.dictionary)
 
 def get_season_from_date(curr_date):
     new_date=date(2024,curr_date.month,curr_date.day)

@@ -18,6 +18,9 @@
     height:100px;
     text-align:center;
     border:  0.5px DarkSlateGrey dotted;
+    background-color:white;
+    text-decoration: underline;
+    color:#0000EE;
    
 }
 
@@ -42,8 +45,8 @@
 
 .icon {
     float:left;
-    margin-right:0.5em;
-    margin-bottom:0.5em;
+    margin-right:0.7em;
+    margin-bottom:0.7em;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -60,12 +63,13 @@
 }
 
 .date {
-    margin-top:0.3em;
+    margin-top:0.7em;
     font-weight:bold;
 }
 
-.content {
+#content {
     display:inline-block;
+    font-weight:none;
 }
 
 #attribution {

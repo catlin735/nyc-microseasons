@@ -1,38 +1,61 @@
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NYC Microseasons</title>
-  </head>
-  <body>
-    <div class="navbar">     
-      {% for s in seasons %}
-      <div class="nav-item">
-      <a href="/{{s['rowid']}}">
-          <p>{{ s['rowid'] }}</p>
-      </a>
-    </div>
-  {% endfor %}
-    </div>
-    
-    <div class="container">
-      <div class="icon">
-        <img src="{{image}}">
-      </div>
-   
-      <div class="date">Microseason: <br> {{season.start_date}} to {{season.end_date}}</div></strong>
-      <br>
-      <br>
-      <div class="content">
-       {{season.description}}
-      </div>
-      <br>
-      <div id="attribution">NYC microseasons compiled by <a href="https://mcgolrickbirdclub.substack.com">McGolrick Bird Club</a>.
-        </div>
-     </div>
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NYC Microseasons</title>
+</head>
 
-  
-  </body>
-  <footer>
-   
-    
-  </footer>
+<body>
+  <div class="navbar">
+    {% for s in seasons %}
+    <button class="nav-item" id="{{s.id}}" onclick="nav(event)">
+      {{ s.start_date }}
+    </button>
+    {% endfor %}
+  </div>
+
+  <div class="container" id="container">
+    <div class="icon">
+      <img src="{{season.image}}">
+    </div>
+
+    <div class="date">Microseason: <br>
+      <div id="start_date" style="display:inline">{{season.start_date}}</div> to <div id="end_date" style="display:inline">{{season.end_date}}</div>
+    </div>
+    <br>
+    <div id="content">
+      {{season.description}}
+    </div>
+    <br>
+    <div id="attribution">NYC microseasons compiled by <a href="https://mcgolrickbirdclub.substack.com">McGolrick Bird
+        Club</a>.
+    </div>
+
+
+
+    <script>
+      function nav(event) {
+        $(".nav-item").click(function (event) {
+          $('#' + event.target.id).css("color","#551A8B");
+          $.ajax({
+            type: 'GET',
+            url: "/get",
+            data: { 'id': event.target.id },
+            dataType: "text",
+            success: function (response) {
+              // process on data
+              const obj = JSON.parse(response);
+              $("#content").html(obj.description);
+              $("#start_date").html(obj.start_date);
+              $("#end_date").html(obj.end_date);
+              console.log(obj.start_date);
+
+            }
+          });
+        });
+      }
+    </script>
+</body>
+<footer>
+
+</footer>
