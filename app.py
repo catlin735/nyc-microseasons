@@ -1,6 +1,7 @@
 import sqlite3
 from datetime import date, datetime as dt
-from flask import Flask,render_template,request, redirect
+from flask import Flask,render_template,redirect
+from pytz import timezone
 from werkzeug.exceptions import abort
 
 app = Flask(__name__)
@@ -16,15 +17,13 @@ class Season:
 def index():
     return redirect("/0")
 
-@app.route('/image')
-def image():
-    return "./static/assets/img_1.jpg"
+
 @app.route('/<int:id>')
 def season(id=1):
     conn = get_db_connection()
     microseasons = conn.execute('SELECT rowid FROM microseasons').fetchall()
     if id==0:
-        s=get_season_from_date(dt.today())
+        s=get_season_from_date(dt.now(timezone('US/Eastern')))
     else:
         s=get_season_from_id(id)
     season=Season(s['rowid'],s['start_date'],s['end_date'],s['description'])
