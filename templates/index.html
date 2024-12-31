@@ -8,18 +8,17 @@
 <body>
   <div class="navbar">
     {% for s in seasons %}
-    <button class="nav-item" id="{{s.id}}" onclick="nav(event)">
-      {{ s.start_date }}
-    </button>
+    <div class="nav-item" id="{{s.id}}" onclick="nav(event)">
+     {{s.start_date}}
+    </div>
     {% endfor %}
   </div>
 
   <div class="container" id="container">
     <div class="icon">
-      <img src="{{season.image}}">
-    </div>
-
-    <div class="date">Microseason: <br>
+      <img src="{{season.image}}" id="img"> 
+      </div>
+    <div class="date" style="margin-top:0.8em;">Micro-season: <br>
       <div id="start_date" style="display:inline">{{season.start_date}}</div> to <div id="end_date" style="display:inline">{{season.end_date}}</div>
     </div>
     <br>
@@ -27,8 +26,8 @@
       {{season.description}}
     </div>
     <br>
-    <div id="attribution">NYC microseasons compiled by <a href="https://mcgolrickbirdclub.substack.com">McGolrick Bird
-        Club</a>.
+    <div id="attribution">This site displays New York City micro-seasons compiled by <a href="https://mcgolrickbirdclub.substack.com">McGolrick Bird
+        Club</a>. For more about microseasons, read about the 72 Japanese micro-seasons <a href="https://kyotojournal.org/uncategorized/the-72-japanese-micro-seasons/">here</a>.
     </div>
 
 
@@ -48,6 +47,7 @@
               $("#content").html(obj.description);
               $("#start_date").html(obj.start_date);
               $("#end_date").html(obj.end_date);
+              $("#img").attr("src",obj.image);
               console.log(obj.start_date);
 
             }

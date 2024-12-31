@@ -1,4 +1,7 @@
 
+body {
+    font-family:'Trebuchet MS',serif;
+}
 .navbar {
     overflow: auto;
     display:flex;
@@ -21,13 +24,14 @@
     background-color:white;
     text-decoration: underline;
     color:#0000EE;
+    font-size:0.8em;
    
 }
 
 .nav-item img {
     position: absolute;
-    width: 60%;
-    height: 60%;
+    width: 50%;
+    height: 50%;
 }
 
 .container {
@@ -63,17 +67,15 @@
 }
 
 .date {
-    margin-top:0.7em;
     font-weight:bold;
 }
 
 #content {
-    display:inline-block;
+    margin-top:0.5em;
     font-weight:none;
 }
 
 #attribution {
-    margin-top:1em;
+    margin-top:0.8em;
     font-size: 0.8em;
-    font-family:'Trebuchet MS',serif;
 }
