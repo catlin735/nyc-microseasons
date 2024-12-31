@@ -1,0 +1,37 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NYC Microseasons</title>
+  </head>
+  <body>
+    <div class="navbar">     
+      {% for s in seasons %}
+      <div class="nav-item">
+      <a href="/{{s['rowid']}}">
+          <p>{{ s['rowid'] }}</p>
+      </a>
+    </div>
+  {% endfor %}
+    </div>
+    
+    <div class="container">
+      <div class="icon">
+        <img src="{{image}}">
+      </div>
+   
+      <div class="date">Microseason: <br> {{season.start_date}} to {{season.end_date}}</div></strong>
+      <br>
+      <div class="content">
+       {{season.description}}
+      </div>
+      <br>
+      <div id="attribution">NYC microseasons compiled by <a href="https://mcgolrickbirdclub.substack.com">McGolrick Bird Club</a>.
+        </div>
+     </div>
+
+  
+  </body>
+  <footer>
+   
+    
+  </footer>

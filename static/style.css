@@ -2,8 +2,7 @@
 .navbar {
     overflow: auto;
     display:flex;
-    justify-content:center;
-    width:100vw;
+    justify-content:flex-start;
     position: sticky; 
     top: 0;
     left: 0;
@@ -33,14 +32,39 @@
     padding: 2em;
     padding-top: 1.5em;
     max-width: 40em;
-    margin: 0 auto;
-    margin-top: 6%;
-    margin-bottom: 6%;
+    margin: auto auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
     background-repeat: no-repeat;
     background-size: cover;
     
 }
 
-footer {
-  
+.icon {
+    float:left;
+    margin-right:0.5em;
+    margin-bottom:0.5em;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position: relative;
+    width:3em;
+    height:3em;
+}
+.icon img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+
+.date {
+    margin-top:0.3em;
+    font-weight:bold;
+}
+
+#attribution {
+    font-size: 0.8em;
+    font-family:'Trebuchet MS',serif;
 }
